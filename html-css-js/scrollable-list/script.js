@@ -39,4 +39,59 @@ function createList() {
       listItems.push(listItem)
       draggableList.appendChild(listItem)
     })
+
+  addEventListeners();
 }
+
+let dragStartIndex;
+
+function dragStart() {
+  dragStartIndex = +this.closest('li').getAttribute('data-index')
+}
+function dragOver(event) { event.preventDefault() }
+function dragEnter() { this.classList.add('over') }
+function dragLeave() { this.classList.remove('over') }
+
+function dragDrop() {
+  const dragEndIndex = +this.closest('li').getAttribute('data-index');
+  swapItems(dragStartIndex, dragEndIndex)
+  this.classList.remove('over')
+}
+
+function swapItems(fromIndex, toIndex) {
+  const fromItem = listItems[fromIndex].querySelector('.draggable')
+  const toItem = listItems[toIndex].querySelector('.draggable')
+
+  listItems[fromIndex].appendChild(toItem)
+  listItems[toIndex].appendChild(fromItem)
+}
+
+function checkListOrder() {
+  listItems.forEach((listItem, index) => {
+    const personName = listItem.querySelector('.draggable').innerText.trim()
+    if (personName !== top10Movies[index]) {
+      listItem.classList.add('wrong')
+    } else {
+      listItem.classList.remove('wrong')
+      listItem.classList.add('right')
+    }
+  })
+}
+
+function addEventListeners() {
+  const draggables = document.querySelectorAll('.draggable')
+  const dragListItems = document.querySelectorAll('.draggable-list li')
+
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', dragStart)
+  })
+
+  dragListItems.forEach(item => {
+    item.addEventListener('dragover', dragOver)
+    item.addEventListener('drop', dragDrop)
+    item.addEventListener('dragenter', dragEnter)
+    item.addEventListener('dragleave', dragLeave)
+  })
+}
+
+check.addEventListener('click', checkListOrder)
