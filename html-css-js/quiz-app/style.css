@@ -1,0 +1,98 @@
+*, *::before, *::after{
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+:root{
+  --correct-color : #AEC861;
+  --wrong-color: #FD6A68; 
+  --neutral-color: #2F6A87;
+  --btn-neutral: #3e5488;
+  --btn-border: #273455;
+}
+
+
+body{
+  background: var(--neutral-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+body.correct{
+  background: var(--correct-color);
+}
+
+body.wrong{
+  background: var(--wrong-color);
+}
+
+.container{
+  /* width refers to complete width of container including padding, content, border because of box-sizing */
+  width: 800px;
+  /* max width refers to max width the content can take so it wont overflow.. 80% of page width is given*/
+  max-width: 80%; 
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px;
+}
+
+.btn-grid{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+#question{
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.btn{
+  background: var(--btn-neutral);
+  color: #fff;
+  border: solid 1px var(--btn-border);
+  border-radius: 5px;
+  padding: 20px 16px;
+  font-size: 1.3rem;
+  outline: none;
+}
+
+.btn:hover{
+  border-color: #f4f4f4;
+}
+
+.btn.correct{
+  background: var(--correct-color);
+  color: #333
+}
+
+.btn.wrong{
+  background: var(--wrong-color);
+  color: #333
+}
+
+.start-btn, 
+.next-btn{
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 23px 19px;
+}
+
+.controls{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide{
+  display: none;
+}
